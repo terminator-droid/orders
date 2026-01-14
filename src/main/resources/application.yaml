@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: orderservice
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-v.1-master.xml
+    driver-class-name: org.postgresql.Driver
+    liquibase-schema: orderservice
+    enabled: ${LIQUIBASE_ENABLED:true}
+
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/orderservice}
+    password: ${PASSWORD_DB:postgres}
+    username: ${USERNAME_DB:postgres}

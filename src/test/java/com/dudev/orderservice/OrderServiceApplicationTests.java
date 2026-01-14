@@ -1,4 +1,4 @@
-package com.dudev.orders;
+package com.dudev.orderservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest
-class OrdersApplicationTests {
+class OrderServiceApplicationTests {
 
     @Test
     void contextLoads() {
