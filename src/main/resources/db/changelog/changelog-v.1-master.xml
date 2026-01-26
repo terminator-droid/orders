@@ -6,4 +6,5 @@
 
     <include file="001.create-users.xml" relativeToChangelogFile="true"/>
     <include file="002.create-orders.xml" relativeToChangelogFile="true"/>
+    <include file="003.create-tokens.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

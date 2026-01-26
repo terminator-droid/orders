@@ -4,7 +4,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="001-create-users-table" author="duss">
+    <changeSet id="002-create-orders-table" author="duss">
         <preConditions>
             <not>
                 <tableExists tableName="orders"/>
@@ -16,7 +16,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="user_id" type="UUID">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="description" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -24,7 +24,7 @@
             <column name="status" type="VARCHAR(20)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="TIMESTAMP_WITH_TIMEZONE">
+            <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
         </createTable>

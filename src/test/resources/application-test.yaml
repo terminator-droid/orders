@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    password: test
+    username: test
+  Jackson:
+    serialization:
+      fail-on-empty-beans: false
+  jpa:
+    properties.hibernate:
+      hbm2ddl.auto: validate
+  autoconfigure:
+    exclude:
+      - org.springdoc.webmvc.ui.SwaggerConfig
+      - org.springdoc.core.configuration.SpringDocConfiguration
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false

@@ -1,8 +1,17 @@
 package com.dudev.orderservice.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
-public record UserDto(
-        UUID id,
-        String username
-) {}
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDto {
+    private UUID id;
+    private String username;
+}
