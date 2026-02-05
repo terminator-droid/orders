@@ -14,13 +14,13 @@ public class ServiceMethodLoggingAspect {
     @Around("execution(* com.dudev.orderservice.service.impl.*.*(..))")
     public Object logServiceMethods(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getName();
-        log.info("START invocation method={}", methodName);
+        log.debug("START invocation method={}", methodName);
         Object result;
         try {
             result = joinPoint.proceed();
             return result;
         } finally {
-            log.info("END invocation method={}", methodName);
+            log.debug("END invocation method={}", methodName);
         }
     }
 }
