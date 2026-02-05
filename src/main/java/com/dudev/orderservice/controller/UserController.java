@@ -1,7 +1,8 @@
 package com.dudev.orderservice.controller;
 
 import com.dudev.orderservice.dto.UserDto;
-import com.dudev.orderservice.service.impl.UserServiceImpl;
+import com.dudev.orderservice.exception.UserNotFoundException;
+import com.dudev.orderservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @GetMapping
     public List<UserDto> findAllUsers(){
@@ -27,5 +28,10 @@ public class UserController {
     @DeleteMapping( "/{id}")
     public void deleteUser(@PathVariable UUID id) {
         userService.delete(id);
+    }
+
+    @GetMapping("/{id}")
+    public UserDto getUser(@PathVariable UUID id) {
+        return userService.findById(id).orElseThrow(() ->new UserNotFoundException(id));
     }
 }

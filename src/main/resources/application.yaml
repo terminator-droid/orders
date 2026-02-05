@@ -18,8 +18,9 @@ spring:
     password: admin
     username: admin
 token:
-  signing:
-    key: rNAWe6FZvpNArgaCAyt0099o+IdvTex1vNObQIN/7hw=
+  jwt:
+    expiration: 3600000
+    salt: rNAWe6FZvpNArgaCAyt0099o+IdvTex1vNObQIN/7hw=
   refresh:
     expiration: 86400000
 
@@ -30,3 +31,7 @@ app:
 springdoc:
   swagger-ui:
     persist-authorization: true
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} traceId=%X{traceId} %msg%n'

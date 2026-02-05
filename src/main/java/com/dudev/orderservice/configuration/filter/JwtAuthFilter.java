@@ -1,7 +1,7 @@
 package com.dudev.orderservice.configuration.filter;
 
-import com.dudev.orderservice.service.impl.JwtServiceImpl;
-import com.dudev.orderservice.service.impl.UserServiceImpl;
+import com.dudev.orderservice.service.JwtService;
+import com.dudev.orderservice.service.UserService;
 import jakarta.servlet.ServletException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -21,8 +21,8 @@ import java.io.IOException;
 public class JwtAuthFilter extends OncePerRequestFilter {
     public static final String BEARER_PREFIX = "Bearer ";
     public static final String HEADER_NAME = "Authorization";
-    private final JwtServiceImpl jwtService;
-    private final UserServiceImpl userService;
+    private final JwtService jwtService;
+    private final UserService userService;
 
     @Override
     protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request,
@@ -62,4 +62,3 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
-

@@ -2,7 +2,7 @@ package com.dudev.orderservice.service.impl;
 
 import com.dudev.orderservice.dto.CreateUserDto;
 import com.dudev.orderservice.dto.UserDto;
-import com.dudev.orderservice.dto.UserDtoFull;
+import com.dudev.orderservice.dto.FullUserDto;
 import com.dudev.orderservice.exception.UserNotFoundException;
 import com.dudev.orderservice.mapper.UserMapper;
 import com.dudev.orderservice.model.enums.Role;
@@ -57,11 +57,11 @@ public class UserServiceImpl implements com.dudev.orderservice.service.UserServi
     }
 
     @Override
-    public UserDtoFull getCurrentUser() {
+    public FullUserDto getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         GrantedAuthority role = authentication.getAuthorities().stream().findFirst().orElseThrow();
         UserDto userDto = findByUsername(((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername());
-        return UserDtoFull.builder()
+        return FullUserDto.builder()
                 .id(userDto.getId())
                 .role(role.getAuthority())
                 .username(userDto.getUsername())

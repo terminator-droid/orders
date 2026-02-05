@@ -2,12 +2,12 @@ package com.dudev.orderservice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 @Builder
 public class CreateOrderDto {
 
     @NotBlank
-    String description;
+    private final String description;
 }

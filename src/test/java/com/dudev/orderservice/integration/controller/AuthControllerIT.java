@@ -4,7 +4,7 @@ import com.dudev.orderservice.dto.JwtAuthenticationResponse;
 import com.dudev.orderservice.dto.RefreshAccessDto;
 import com.dudev.orderservice.dto.SignInRequest;
 import com.dudev.orderservice.dto.SignUpRequest;
-import com.dudev.orderservice.dto.UserDtoFull;
+import com.dudev.orderservice.dto.FullUserDto;
 import com.dudev.orderservice.integration.basetest.IntegrationTestBase;
 import com.dudev.orderservice.model.RefreshToken;
 import com.dudev.orderservice.model.User;
@@ -12,7 +12,7 @@ import com.dudev.orderservice.model.enums.Role;
 import com.dudev.orderservice.repository.RefreshTokenRepository;
 import com.dudev.orderservice.repository.UserRepository;
 import com.dudev.orderservice.service.AuthenticationService;
-import com.dudev.orderservice.service.RefreshTokenService;
+import com.dudev.orderservice.service.JwtService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
@@ -50,7 +50,7 @@ public class AuthControllerIT extends IntegrationTestBase {
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
     @Autowired
-    private RefreshTokenService refreshTokenService;
+    private JwtService jwtService;
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -103,11 +103,11 @@ public class AuthControllerIT extends IntegrationTestBase {
                 .andExpect(status().isOk())
                 .andReturn();
 
-        UserDtoFull userDtoFull = objectMapper.createParser(
+        FullUserDto userDtoFull = objectMapper.createParser(
                         authenticatedUser
                                 .getResponse()
                                 .getContentAsString())
-                .readValueAs(UserDtoFull.class);
+                .readValueAs(FullUserDto.class);
 
         String token = refreshTokenRepository.findByToken(actualResponse.getRefreshToken()).orElseThrow().getToken();
 
@@ -124,7 +124,7 @@ public class AuthControllerIT extends IntegrationTestBase {
                 .password(PASSWORD)
                 .role(Role.USER)
                 .build());
-        RefreshToken oldToken = refreshTokenService.create(user.getId());
+        RefreshToken oldToken = jwtService.createRefreshToken(user.getId());
         RefreshAccessDto refreshAccessDto = RefreshAccessDto.builder()
                 .refreshToken(oldToken.getToken()).build();
 
@@ -157,8 +157,8 @@ public class AuthControllerIT extends IntegrationTestBase {
                 .andExpectAll(status().isOk())
                 .andReturn();
 
-        UserDtoFull userDto = objectMapper.createParser(mvcResult.getResponse()
-                .getContentAsString()).readValueAs(UserDtoFull.class);
+        FullUserDto userDto = objectMapper.createParser(mvcResult.getResponse()
+                .getContentAsString()).readValueAs(FullUserDto.class);
 
         assertThat(userDto.getUsername()).isEqualTo(USERNAME);
         assertThat(userDto.getId()).isEqualTo(user.getId());

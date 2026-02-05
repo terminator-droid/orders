@@ -2,7 +2,7 @@ package com.dudev.orderservice.service;
 
 import com.dudev.orderservice.dto.CreateUserDto;
 import com.dudev.orderservice.dto.UserDto;
-import com.dudev.orderservice.dto.UserDtoFull;
+import com.dudev.orderservice.dto.FullUserDto;
 import com.dudev.orderservice.model.enums.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +20,7 @@ public interface UserService extends UserDetailsService {
 
     List<UserDto> findAll();
 
-    UserDtoFull getCurrentUser();
+    FullUserDto getCurrentUser();
 
     void grantAdminRole(UUID userId);
 

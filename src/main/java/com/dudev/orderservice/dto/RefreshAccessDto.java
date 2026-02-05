@@ -1,11 +1,11 @@
 package com.dudev.orderservice.dto;
 
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 @Builder
 public class RefreshAccessDto {
 
-    String refreshToken;
+    private final String refreshToken;
 }

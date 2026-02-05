@@ -2,13 +2,13 @@ package com.dudev.orderservice.dto;
 
 import com.dudev.orderservice.model.enums.Status;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 
-@Value
+@Data
 @RequiredArgsConstructor
 public class StatusUpdateDto {
 
     @Schema(description = "Новый статус", example = "ACTIVE")
-    Status status;
+    private final Status status;
 }

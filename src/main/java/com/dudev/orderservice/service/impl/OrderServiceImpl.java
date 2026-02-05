@@ -10,6 +10,7 @@ import com.dudev.orderservice.model.enums.Role;
 import com.dudev.orderservice.model.enums.Status;
 import com.dudev.orderservice.repository.OrderRepository;
 import com.dudev.orderservice.repository.UserRepository;
+import com.dudev.orderservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
@@ -31,7 +32,7 @@ public class OrderServiceImpl implements com.dudev.orderservice.service.OrderSer
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-    private final UserServiceImpl userService;
+    private final UserService userService;
     private final UserRepository userRepository;
 
     @Transactional
@@ -89,7 +90,7 @@ public class OrderServiceImpl implements com.dudev.orderservice.service.OrderSer
 
         if (!order.getUser().getUsername().equals(currentUsername)
                 && authentication.getAuthorities().stream()
-                .noneMatch(role -> role instanceof Role && ((Role) role).equals(Role.ADMIN))) {
+                .noneMatch(role -> role.equals(Role.ADMIN))) {
             throw new AccessDeniedException("Not owner or admin");
         }
             orderRepository.deleteById(orderId);
@@ -106,14 +107,3 @@ public class OrderServiceImpl implements com.dudev.orderservice.service.OrderSer
                 .toList();
     }
 }
-
-
-
-
-
-
-
-
-
-
-

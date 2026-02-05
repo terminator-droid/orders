@@ -3,7 +3,7 @@ package com.dudev.orderservice.controller;
 import com.dudev.orderservice.dto.CreateOrderDto;
 import com.dudev.orderservice.dto.OrderDto;
 import com.dudev.orderservice.model.enums.Status;
-import com.dudev.orderservice.service.impl.OrderServiceImpl;
+import com.dudev.orderservice.service.OrderService;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderServiceImpl orderService;
+    private final OrderService orderService;
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
