@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### JDBC drivers ###
+lib/*.jar

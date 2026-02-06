@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: orderservice
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-v.1-master.xml
+    driver-class-name: org.postgresql.Driver
+    enabled: ${LIQUIBASE_ENABLED:true}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+    open-in-view: false
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgres:5432/orders_db
+    password: admin
+    username: admin
+token:
+  jwt:
+    expiration: 3600000
+    salt: rNAWe6FZvpNArgaCAyt0099o+IdvTex1vNObQIN/7hw=
+  refresh:
+    expiration: 86400000
+
+app:
+  admin:
+    username: admin123
+    password: admin123
+springdoc:
+  swagger-ui:
+    persist-authorization: true
+
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} traceId=%X{traceId} %msg%n'

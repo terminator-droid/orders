@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="004-create-refresh-tokens-table" author="duss">
+        <preConditions>
+            <not>
+                <tableExists tableName="refresh_tokens"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="refresh_tokens">
+            <column name="id" type="UUID DEFAULT gen_random_uuid()">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="UUID">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="token" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expiry_date" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="005-add-fk-tokens-users" author="duss">
+        <addForeignKeyConstraint
+                constraintName="fk_tokens_users"
+                baseTableName="refresh_tokens"
+                baseColumnNames="user_id"
+                referencedTableName="users"
+                referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>
